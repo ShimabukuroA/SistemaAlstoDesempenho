@@ -5,7 +5,7 @@
 double f(double x);
 double f(double x)
 {
-  return 1.0 / exp(x * x);
+  return 1.0 / exp(x);
 } 
 
 
