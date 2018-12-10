@@ -3,7 +3,6 @@
 #include <sys/time.h>
 #include <omp.h>
 #include "mede_time.h"
-#define NTHREADS 4
 
 
 double f(double x);
@@ -23,7 +22,6 @@ double h(double x){
 
 int main(){
     int n; //numero de particoes
-    int i;
     double a, b; //intervalo de integracao
     double x; //valor de x onde a funcao e calculada
     double delta; //tamanho de cada particao
@@ -42,11 +40,9 @@ int main(){
 
     TIMER_CLEAR;  
     TIMER_START;
-
-    #pragma omp parallel for num_threads(NTHREADS) shared(a, delta, n) private(i, x) reduction(+: sum)
-    for(int i = 0 ; i < n-1; i++){
-      x = a + i*delta;
-      sum += f(x) + f(x + delta);
+    for(int i = 1; i < n-1; i++){
+        sum = sum + f(x) + f(x+delta);
+        x = x + delta;
     }
     sum = sum * delta/2;
     TIMER_STOP;
