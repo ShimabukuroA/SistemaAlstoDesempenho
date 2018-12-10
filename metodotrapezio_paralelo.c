@@ -1,11 +1,12 @@
-#include <mpi.h>
 #include <stdio.h>
 #include <math.h>
 #include <omp.h>
 
-double f(double x){
-    return 1/exp(x);
-}
+double f(double x);
+double f(double x)
+{
+  return 1.0 / exp(x * x);
+} 
 
 
 double g(double x){
@@ -36,12 +37,14 @@ int main(){
 
 
     for(int i = 1; i < n-1; i++){
-        sum = sum + f(x) + f(x+h);
-        x = x + h;
+        sum = sum + f(x) + f(x+delta);
+        x = x + delta;
     }
-    sum = sum * h/2;
+    sum = sum * delta/2;
 
-    printf("O resultado da integral e: %lf", sum);
+    printf("O resultado da integral e: %lf\n", sum);
 
     return 0;
 }
+
+   
