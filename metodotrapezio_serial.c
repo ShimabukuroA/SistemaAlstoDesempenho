@@ -26,16 +26,16 @@ int main(){
     double x; //valor de x onde a funcao e calculada
     double delta; //tamanho de cada particao
     double sum  = 0; //soma da integral
-    printf("Digite o número de particoes\n");
+    printf("Digite o tamanho do step: ");
     fflush(stdout);
-    scanf("%d", &n);
-    printf("Digite o limite inferior\n");
+    scanf("%lf", &delta);
+    printf("Digite o limite inferior: ");
     fflush(stdout);
     scanf("%lf", &a);
-    printf("Digite o limite superior\n");
+    printf("Digite o limite superior: ");
     fflush(stdout);
     scanf("%lf", &b);
-    delta = (b-a)/(n-1);
+    n = (int) (b-a)/delta;
     x=a;
 
     TIMER_CLEAR;  
@@ -46,8 +46,8 @@ int main(){
     }
     sum = sum * delta/2;
     TIMER_STOP;
-    printf ("\nTEMPO EXECUCAO: %12.7f\n",TIMER_ELAPSED );
-    printf("O resultado da integral e: %lf\n", sum);
+    printf ("TEMPO EXECUCAO: %12.7f",TIMER_ELAPSED );
+    printf("\nO resultado da integral e: %lf\n", sum);
 
     return 0;
 }
